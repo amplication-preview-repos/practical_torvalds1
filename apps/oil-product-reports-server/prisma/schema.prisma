@@ -1,0 +1,35 @@
+datasource db {
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Shift {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  dateTime  DateTime?
+  smKey     Int?
+}
+
+model Transaction {
+  id          String                    @id @default(cuid())
+  createdAt   DateTime                  @default(now())
+  updatedAt   DateTime                  @updatedAt
+  oilName     String?
+  literPrice  Float?
+  literDeliv  Float?
+  amountDeliv Float?
+  amountLast  Float?
+  oilLongName String?
+  typeField   EnumTransactionTypeField?
+  source      String?
+  literLast   Float?
+}
+
+enum EnumTransactionTypeField {
+  Option1
+}
